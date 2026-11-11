@@ -13,6 +13,9 @@ let nth_prime n =
   let idx = ref 0 in
   let p = ref 1 in
   while !idx < n do
-    if is_prime !p then
-      incr idx
-    idx <- idx + if is_prime
+    incr p;
+    if is_prime !p then incr idx;
+  done;
+  !p
+
+let ans = nth_prime 10_001
