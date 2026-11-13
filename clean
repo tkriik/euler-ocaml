@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rm -f *.cmi *.cmo a.out
