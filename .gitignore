@@ -3,4 +3,5 @@
 *.cmx
 *.o
 *.out
+.ocamlformat
 _build/
