@@ -1,0 +1,3 @@
+(executable
+  (name euler-ocaml)
+  (libraries zarith))
