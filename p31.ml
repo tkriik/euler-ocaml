@@ -1,12 +1,26 @@
-let rec compress = function
-  | [] -> []
-  | 1 :: 1 :: xs -> 2 :: compress xs
-  | 1 :: 2 :: 2 :: xs -> 5 :: compress xs
-  | [ 5; 5 ] -> [ 10 ]
-  | [ 2; 2; 2; 2; 2 ] -> [ 10 ]
-  | [ 10 ] -> [ 10 ]
-  | _ -> invalid_arg "shouldn't happen"
+let rec routes = function
+  | 1 -> 1
+  | 2 -> 1 + routes 1
+  | 5 -> 1 + routes 2 + routes 1
+  | 10 -> 1 + routes 5 + routes 2 + routes 1
+  | _ -> invalid_arg "unknown routes"
 ;;
 
-let ps = List.init 10 (fun _ -> 1)
-let ans = Seq.iterate compress ps |> Seq.take 10 |> List.of_seq
+(*
+    5 ->
+5
+2+2+1
+2+1+1+1
+1+1+1+1+1
+    10 ->
+10
+5+5
+5+2+2+1
+5+2+1+1+1
+5+1+1+1+1+1
+2+2+1+1+1+1+1+1
+2+2+2+1+1+1+1
+2+2+2+2+1+1
+2+1+1+1+1+1+1+1+1
+1+1+1+1+1+1+1+1+1+1
+*)
