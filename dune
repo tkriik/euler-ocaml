@@ -1,3 +1,9 @@
 (executable
+  (name sandbox)
+  (modules sandbox)
+  (libraries domainslib))
+
+(executable
   (name p25)
+  (modules p25)
   (libraries zarith))

@@ -1,0 +1,11 @@
+opam-version: "2.0"
+synopsis: "euler-ocaml"
+depends: [
+  "ocaml" {= "5.5.0"}
+  "dune" {>= "3.0"}
+  "zarith"
+  "domainslib"
+  "utop"
+  "ocaml-lsp-server"
+  "ocamlformat"
+]
