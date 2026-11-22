@@ -65,3 +65,15 @@
   (modules p36)
   (promote (until-clean))
   (libraries euler_util))
+
+(executable
+  (name p37)
+  (modules p37)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p38)
+  (modules p38)
+  (promote (until-clean))
+  (libraries euler_util))
