@@ -42,8 +42,26 @@
   (modules p32b)
   (promote (until-clean)))
 
-  (executable
-    (name p33)
-    (modules p33)
-    (promote (until-clean))
-    (libraries euler_util))
+(executable
+  (name p33)
+  (modules p33)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p34)
+  (modules p34)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p35)
+  (modules p35)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p36)
+  (modules p36)
+  (promote (until-clean))
+  (libraries euler_util))

@@ -1,6 +1,13 @@
 let int_pow n exp = int_of_float (float_of_int n ** float_of_int exp)
 let rec gcd n d = if d = 0 then n else gcd d (n mod d)
 
+let digits = function
+  | n when abs n < 10 -> [ n ]
+  | n ->
+    let rec aux n' = if n' = 0 then [] else (n' mod 10) :: aux (n' / 10) in
+    List.rev (aux n)
+;;
+
 let gen_primes count =
   if count < 2
   then []
