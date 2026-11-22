@@ -1,3 +1,8 @@
+(library
+  (name euler_util)
+  (modules util)
+  (wrapped false))
+
 (executable
   (name sandbox)
   (modules sandbox)
@@ -9,6 +14,12 @@
   (modules p25)
   (promote (until-clean))
   (libraries zarith))
+
+(executable
+  (name p27)
+  (modules p27)
+  (promote (until-clean))
+  (libraries euler_util))
 
 (executable
   (name p31)
@@ -30,3 +41,9 @@
   (name p32b)
   (modules p32b)
   (promote (until-clean)))
+
+  (executable
+    (name p33)
+    (modules p33)
+    (promote (until-clean))
+    (libraries euler_util))
