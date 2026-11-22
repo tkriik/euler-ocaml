@@ -1,9 +1,22 @@
 (executable
   (name sandbox)
   (modules sandbox)
-  (libraries domainslib))
+  (promote (until-clean))
+  (libraries domainslib threads zarith))
 
 (executable
   (name p25)
   (modules p25)
+  (promote (until-clean))
   (libraries zarith))
+
+(executable
+  (name p31)
+  (modules p31)
+  (promote (until-clean))
+  (libraries domainslib))
+
+(executable
+  (name p31b)
+  (modules p31b)
+  (promote (until-clean)))

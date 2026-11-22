@@ -3,6 +3,8 @@
 *.cmx
 *.o
 *.out
+*.exe
+*.install
 .ocamlformat
 _build/
 _opam/
