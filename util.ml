@@ -1,3 +1,4 @@
+let int_sqrt n = float_of_int n |> sqrt |> int_of_float
 let int_pow n exp = int_of_float (float_of_int n ** float_of_int exp)
 let rec gcd n d = if d = 0 then n else gcd d (n mod d)
 

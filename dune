@@ -77,3 +77,33 @@
   (modules p38)
   (promote (until-clean))
   (libraries euler_util))
+
+(executable
+  (name p39)
+  (modules p39)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p39b)
+  (modules p39b)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p40)
+  (modules p40)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p41)
+  (modules p41)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p42)
+  (modules p42)
+  (promote (until-clean))
+  (libraries euler_util))
