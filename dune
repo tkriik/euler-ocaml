@@ -20,3 +20,13 @@
   (name p31b)
   (modules p31b)
   (promote (until-clean)))
+
+(executable
+  (name p32)
+  (modules p32)
+  (promote (until-clean)))
+
+(executable
+  (name p32b)
+  (modules p32b)
+  (promote (until-clean)))
