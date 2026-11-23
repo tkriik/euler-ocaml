@@ -107,3 +107,45 @@
   (modules p42)
   (promote (until-clean))
   (libraries euler_util))
+
+(executable
+  (name p43)
+  (modules p43)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p44)
+  (modules p44)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p45)
+  (modules p45)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p46)
+  (modules p46)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p47)
+  (modules p47)
+  (promote (until-clean))
+  (libraries euler_util))
+
+(executable
+  (name p48)
+  (modules p48)
+  (promote (until-clean))
+  (libraries euler_util zarith))
+
+(executable
+  (name p49)
+  (modules p49)
+  (promote (until-clean))
+  (libraries euler_util))

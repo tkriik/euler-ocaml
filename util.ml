@@ -47,3 +47,30 @@ let is_prime n =
     in
     test 5)
 ;;
+
+let next_prime n =
+  Seq.iterate (fun n' -> n' + 1) (n + 1)
+  |> Seq.filter is_prime
+  |> Seq.take 1
+  |> List.of_seq
+  |> List.hd
+;;
+
+let prime_factors n =
+  let fs = ref [] in
+  let n' = ref n in
+  while !n' mod 2 = 0 do
+    fs := 2 :: !fs;
+    n' := !n' / 2
+  done;
+  let i = ref 3 in
+  while !i * !i <= !n' do
+    while !n' mod !i = 0 do
+      fs := !i :: !fs;
+      n' := !n' / !i
+    done;
+    i := !i + 2
+  done;
+  if !n' > 1 then fs := !n' :: !fs;
+  !fs
+;;
