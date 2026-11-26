@@ -185,3 +185,9 @@
   (modules p55)
   (promote (until-clean))
   (libraries euler_util zarith))
+
+(executable
+  (name p56)
+  (modules p56)
+  (promote (until-clean))
+  (libraries euler_util zarith))
