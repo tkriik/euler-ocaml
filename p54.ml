@@ -21,9 +21,11 @@ type suit =
   | Heart
   | Spade
 
+type player = Player of int
 type card = rank * suit
 type hand = card list
 type turn = hand * hand
+type game = turn list
 
 type score =
   | High_card
@@ -88,7 +90,7 @@ let card_of_string s : card =
   | _ -> invalid_arg (sprintf "invalid card: %s" s)
 ;;
 
-let rec distrib xs =
+let distrib xs =
   let rec aux acc xs' =
     match xs' with
     | [] | [ _ ] -> [ acc ]
@@ -102,9 +104,8 @@ let diffs xs =
   List.map2 (fun r2 r1 -> r2 - r1) (List.tl xs) (List.take len xs)
 ;;
 
-exception Score of score
-
 let score_of_hand (h : hand) : score =
+  let exception Score of score in
   try
     let ranks = List.sort compare (List.map rank_of_card h) in
     let suits = List.sort compare (List.map suit_of_card h) in
@@ -138,6 +139,76 @@ let score_of_hand (h : hand) : score =
   | Score s -> s
 ;;
 
+let max_rank h =
+  let ranks = List.map rank_of_card (List.sort compare h) in
+  List.fold_left (fun acc c -> if acc < c then c else acc) Two ranks
+;;
+
+let max_rank_pair h =
+  let ranks = List.map rank_of_card (List.sort compare h) in
+  let rec aux acc = function
+    | [] | [ _ ] -> acc
+    | a :: b :: cs -> if a = b && acc < a then aux a (b :: cs) else aux acc (b :: cs)
+  in
+  aux Two ranks
+;;
+
+let max_rank_triple h =
+  let ranks = List.map rank_of_card (List.sort compare h) in
+  List.iter (fun r -> printf "%d " (int_of_rank r)) ranks;
+  print_endline "";
+  let rec aux acc = function
+    | [] | [ _ ] | [ _; _ ] -> acc
+    | a :: b :: c :: ds ->
+      let rest = b :: c :: ds in
+      if a = b && b = c && acc < a then aux a rest else aux acc rest
+  in
+  aux Two ranks
+;;
+
+let max_rank_quad h =
+  let ranks = List.map rank_of_card (List.sort compare h) in
+  let rec aux acc = function
+    | [] | [ _ ] | [ _; _ ] | [ _; _; _ ] -> acc
+    | a :: b :: c :: d :: es ->
+      let rest = b :: c :: d :: es in
+      if a = b && b = c && c = d && acc < a then aux a rest else aux acc rest
+  in
+  aux Two ranks
+;;
+
+let eval_turn ((h1, h2) : turn) : player =
+  let exception Winner of player in
+  try
+    let s1, s2 = score_of_hand h1, score_of_hand h2 in
+    (* score difference *)
+    if s1 > s2 then raise (Winner (Player 1));
+    if s2 > s1 then raise (Winner (Player 2));
+    (* score tie *)
+    let max_f =
+      match s1 with
+      | High_card | Straight | Flush | Straight_flush | Royal_flush -> max_rank
+      | One_pair | Two_pairs -> max_rank_pair
+      | Three_of_a_kind | Full_house -> max_rank_triple
+      | Four_of_a_kind -> max_rank_quad
+    in
+    let max_1, max_2 = max_f h1, max_f h2 in
+    if max_1 > max_2 then raise (Winner (Player 1));
+    if max_2 > max_1 then raise (Winner (Player 2));
+    (* rank tie *)
+    let test_card (r1, _) (r2, _) =
+      if r1 > r2 then raise (Winner (Player 1));
+      if r2 > r1 then raise (Winner (Player 2))
+    in
+    List.iter2 test_card (List.rev h1) (List.rev h2);
+    (* tie *)
+    raise (Winner (Player (-1)))
+  with
+  | Winner p -> p
+;;
+
+let eval_game : game -> player list = List.map eval_turn
+
 let read_match filename : turn list =
   let parse_row s =
     let cards = List.map card_of_string (String.split_on_char ' ' s) in
@@ -149,4 +220,7 @@ let read_match filename : turn list =
 ;;
 
 let game = read_match "p54.in"
-let test s = String.split_on_char ' ' s |> List.map card_of_string |> score_of_hand
+
+let _ =
+  eval_game game |> List.filter (fun p -> p = Player 1) |> List.length |> printf "%d\n"
+;;
