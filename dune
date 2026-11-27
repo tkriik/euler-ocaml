@@ -203,3 +203,9 @@
   (modules p58)
   (promote (until-clean))
   (libraries euler_util))
+
+(executable
+  (name p59)
+  (modules p59)
+  (promote (until-clean))
+  (libraries euler_util))

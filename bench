@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+dune build --profile release "$1".exe && time ./"$1".exe && hyperfine --warmup 5 ./"$1".exe
